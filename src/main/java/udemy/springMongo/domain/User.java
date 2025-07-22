@@ -6,6 +6,8 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import udemy.springMongo.dto.UserDTO;
+
 @Document(collection="user")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,12 @@ public class User implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.email = email;
+	}
+	
+	public User(UserDTO dto) {
+		this.id = dto.getId();
+		this.name = dto.getName();
+		this.email = dto.getEmail();
 	}
 
 	public String getId() {
