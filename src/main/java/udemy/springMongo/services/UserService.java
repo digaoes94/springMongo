@@ -19,6 +19,19 @@ public class UserService {
 		return repo.insert(user);
 	}
 	
+	// "ori" is for "original"---------------------------
+	public User update(User ori) {
+		User aux = findById(ori.getId());
+		updateData(aux, ori);
+		return repo.save(aux);
+	}
+	
+	private void updateData(User aux, User ori) {
+		aux.setName(ori.getName());
+		aux.setEmail(ori.getEmail());
+	}
+	//---------------------------------------------------
+	
 	public void delete(String id) {
 		findById(id);
 		repo.deleteById(id);
