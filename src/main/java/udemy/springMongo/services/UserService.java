@@ -15,6 +15,15 @@ import udemy.springMongo.services.exceptions.ObjectNotFoundException;
 public class UserService {
 	@Autowired private UserRepository repo;
 	
+	public User insert(User user) {
+		return repo.insert(user);
+	}
+	
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+	}
+	
 	public List<User> findAll() {
 		return repo.findAll();
 	}
@@ -22,10 +31,6 @@ public class UserService {
 	public User findById(String id) {
 		Optional<User> user = repo.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("User not found."));
-	}
-	
-	public User insert(User user) {
-		return repo.insert(user);
 	}
 	
 	public User fromDTO(UserDTO dto) {
