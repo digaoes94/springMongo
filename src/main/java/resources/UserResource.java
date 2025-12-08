@@ -23,11 +23,6 @@ public class UserResource {
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> users = serv.findAll();
 		List<UserDTO> dtos = users.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
-		
-		for(User user : users) {
-			dtos.add(new UserDTO(user));
-		}
-		
 		return ResponseEntity.ok().body(dtos);
 	}
 }
