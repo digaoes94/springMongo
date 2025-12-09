@@ -1,12 +1,12 @@
 package services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import domain.User;
+import dtos.UserDTO;
 import repositories.UserRepository;
 import services.exceptions.ObjectNotFoundException;
 
@@ -27,5 +27,13 @@ public class UserService {
 	
 	public List<User> findAll() {
 		return repo.findAll();
+	}
+	
+	public User insert(User user) {
+		return repo.insert(user);
+	}
+	
+	public User fromDTO(UserDTO dto) {
+		return new User(dto);
 	}
 }
