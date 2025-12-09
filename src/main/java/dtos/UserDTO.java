@@ -2,14 +2,15 @@ package dtos;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Optional;
 
 import domain.User;
 
 public class UserDTO implements Serializable {
-    @Serial private static final long serialVersionUID = 1L;
-    
+	@Serial private static final long serialVersionUID = 1L;
+
 	private String id, name, email;
-	
+
 	public UserDTO() {}
 
 	public UserDTO(User user) {
@@ -38,6 +39,6 @@ public class UserDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+
 }
