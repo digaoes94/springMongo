@@ -33,6 +33,23 @@ public class UserService {
 		return repo.insert(user);
 	}
 	
+	public User updateById(User updates) {
+		Object target = repo.findById(updates.getId());
+		
+		if(target == null) {
+			throw new ObjectNotFoundException("Usuário não encontrado.");
+		}
+		else {
+			updateData(updates, (User)target);
+			return repo.save((User)target);
+		}
+	}
+	
+	private void updateData(User updates, User target) {
+		target.setName(updates.getName());
+		target.setEmail(updates.getEmail());
+	}
+
 	public void deleteById(String id) {
 		findById(id);
 		repo.deleteById(id);

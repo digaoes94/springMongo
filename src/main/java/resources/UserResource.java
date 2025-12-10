@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,6 +50,15 @@ public class UserResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@PutMapping(value="/{id}")
+	public ResponseEntity<Void> updateById(@RequestBody UserDTO dto, @PathVariable String id) {
+		User user = serv.fromDTO(dto);
+		user.setId(id);
+		user = serv.updateById(user);
+
+		return ResponseEntity.noContent().build();
 	}
 	
 	@DeleteMapping(value="/{id}")
