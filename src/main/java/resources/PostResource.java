@@ -1,5 +1,6 @@
 package resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,19 @@ public class PostResource {
 		text = URL.decodeParameter(text);
 		List<Post> lista = serv.findByTitle(text);
 		
+		return ResponseEntity.ok().body(lista);
+	}
+	
+	@GetMapping(value="/fullsearch")
+	public ResponseEntity<List<Post>> fullSearch(
+			@RequestParam(value="text", defaultValue="") String text,
+			@RequestParam(value="min", defaultValue="") String minDate, 
+			@RequestParam(value="max", defaultValue="") String maxDate) {
+		text = URL.decodeParameter(text);
+		Date min = URL.convertDate(minDate, new Date(0L));
+		Date max = URL.convertDate(maxDate, new Date());
+		
+		List<Post> lista = serv.fullSearch(text, min, max);
 		return ResponseEntity.ok().body(lista);
 	}
 }
